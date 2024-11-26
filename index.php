@@ -11,7 +11,7 @@ require_once '_guards.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gckriz Bakery</title>
-    <?php login_links();?>
+    <?php login_css();?>
 </head>
 <body>
 

@@ -2,7 +2,7 @@
 
 require "../_init.php";
 
-$category = Category::getAll();
+$Category = new Category();
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +13,7 @@ $category = Category::getAll();
     <title>Admin</title>
 
     <!-- CSS Styling Links -->
-    <?php main_links()?>
+    <?php admin_css()?>
 
 </head>
 <body>
@@ -32,7 +32,7 @@ $category = Category::getAll();
         <form action="../controller/product_controller.php?action=add" method="POST" class="d-flex flex-column border p-2 border-secondary-subtle w-50">
  
               <div class="form-group mb-3">
-                  <label for="product-name">product Name</label>
+                  <label for="product-name">Product Name</label>
                   <input 
                   type="text"
                   name="product-name" 
@@ -48,22 +48,22 @@ $category = Category::getAll();
                     
                     <option value="">--Type of product--</option>
                    
-                    <?php foreach($category as $categories) : ?>
-                    <option value="<?= $categories['categoryID']?>"><?= $categories['categoryName']?></option>
-                     <?php endforeach; ?>
+                    <?php foreach($Category->getAll() as $category) : ?>
+                    <option value="<?= $category['categoryID']?>"><?= $category['categoryName']?></option>
+                    <?php endforeach; ?>
 
                 </select>
               </div>
 
               <div class="form-group mb-3">
-                  <label for="product-quantity">Quantity</label>
+                  <label for="product-stocks">Stocks</label>
                   <input 
                   type="number"
-                  name="product-quantity" 
+                  name="product-stocks" 
                   min="1"
                   max="99"
                   class="form-control" 
-                  id="product-quantity"
+                  id="product-stocks"
                   required>
               </div>
 
@@ -73,7 +73,7 @@ $category = Category::getAll();
                   type="number"
                   name="product-price" 
                   min="1"
-                  max="99"
+                  max="30000"
                   class="form-control" 
                   id="product-price"
                   required>

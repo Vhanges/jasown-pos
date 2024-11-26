@@ -2,20 +2,29 @@
 
 require_once '../_init.php';
 
+$productName = isset($_POST['product-name']) ? htmlspecialchars( $_POST['product-name']) : '';
+$productCategory = isset($_POST['product-category']) ? htmlspecialchars( $_POST['product-category']) : '';
+$productStocks = isset($_POST['product-stocks']) ? htmlspecialchars( $_POST['product-stocks']) : '';
+$productPrice = isset($_POST['product-price']) ? htmlspecialchars( $_POST['product-price']) : '';
 
-if( getAction('action') == 'add'){
+switch(getAction('action')){
 
-    $productName = htmlspecialchars( $_POST['product-name']);
-    $productCategory = htmlspecialchars( $_POST['product-category']);
-    $productQuantity = htmlspecialchars( $_POST['product-quantity']);
-    $productPrice = htmlspecialchars( $_POST['product-price']);
-    
-    try{
-        Product::setItem($productName, $productCategory, productQuantity: $productQuantity, productPrice: $productPrice);
-        header('Location: ../model/product.php');
-    } catch (Exception $e){
+    case 'add': 
+
         
-    }
+        try{
+            Product::setItem($productName, $productCategory, productStocks: $productStocks, productPrice: $productPrice);
+            header('Location: ../admin/admin_add_item.php');
+    
+        } catch (Exception $e){
+            
+        }
+
+        break;
+
+    default:
+             header('Location: ../admin/admin_add_item.php');
+        break;
+ 
 
 }
-

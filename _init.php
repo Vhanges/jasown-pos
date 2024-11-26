@@ -4,6 +4,7 @@ require_once '_config.php';
 require_once '_helper.php'; 
 require_once '_guards.php';
 
+require_once(__DIR__ . '/model/cart.php');
 require_once(__DIR__ . '/model/product.php');
 require_once(__DIR__ . '/model/category.php');
 
@@ -51,21 +52,27 @@ session_start();
 
 
 
-function login_links(){
+function login_css(){
     echo '
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css">
     ';
 };
 
 
-function main_links(){
+function admin_css(){
     echo '
-    <link rel="stylesheet" href="../css/index.css">
     <link rel="stylesheet" href="../css/admin.css">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css">
+    ';
+};
+function cashier_css(){
+    echo '
+    <link rel="stylesheet" href="../css/cashier.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css">
     ';
 };
 
