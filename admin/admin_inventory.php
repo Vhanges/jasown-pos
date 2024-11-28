@@ -4,7 +4,8 @@ require "../_init.php";
 
 // Admin();
 
-$Category = new Category();
+$Products = new Product();
+
 
 ?>
 
@@ -30,63 +31,85 @@ $Category = new Category();
       </div>
       <div class="col-10 d-flex flex-column align-items-center justify-content-center">
         <!-- Second column content -->
-        <h4>Add New product</h4>
-        <hr>
-        <form action="../controller/product_controller.php?action=add" method="POST" class="d-flex flex-column border p-2 border-secondary-subtle w-50">
+        <div class="col-12 d-flex flex-column align-items-center justify-content-start border border-secondary bg-white border-secondary-subtle p-3 m-4 ">
+             
+             <div class="d-flex justify-content-center align-items-center w-100 mb-2 border-bottom border-2 border-subtle" style="height: 70px">
+                 <h4 class="mb-0 text-center">Inventory</h4>
+             </div>
  
-              <div class="form-group mb-3">
-                  <label for="product-name">Product Name</label>
-                  <input 
-                  type="text"
-                  name="product-name" 
-                  class="form-control" 
-                  id="product-name" 
-                  placeholder="Pandesal"
-                  required>
-              </div>
+ 
+                 <table class="table table-responsive table-hover">
+                     <thead class="table-dark align-middle ">
+                         <tr>
+                             <th scope="col">Product</th>
+                             <th scope="col">Category</th>
+                             <th scope="col">Stocks</th>
+                             <th scope="col">Price</th>
+                             <th scope="col">Action</th>
+                         </tr>
+                     </thead>
+                         <tbody>
+                             <?php foreach($Products->getAll() as $product) : ?>
+                                 <tr class="align-middle">
+                                     <td><?= $product["productName"]?></td>
 
-              <div class="form-group mb-3">
-                <label for="product-category">Category</label>
-                <select name="product-category" id="product-category" class="form-control" required>php
-                    
-                    <option value="">--Type of product--</option>
-                   
-                    <?php foreach($Category->getAll() as $category) : ?>
-                    <option value="<?= $category['categoryID']?>"><?= $category['categoryName']?></option>
-                    <?php endforeach; ?>
+                                     <td><?= $product["categoryName"]?></td>
+                                     
+                                        <!-- Stocks -->
+                                    <td style="font-size: small;">
+                                        <div class="d-flex align-items-center"> 
+                                            
+                                        <!-- Reduce -->
+                                            <form action="../controller/product_controller.php?action=subtract-quantity" method="POST"> 
+                                                <input type="hidden" name="productID" value="<?= $cart['productID'] ?>"> 
+                                                <button type="submit" class="btn btn-outline-secondary btn-sm mx-1" style="font-size: 0.75rem; line-height: 1;"> <i class="bi bi-dash"></i> </button> 
+                                            </form> 
+                                        
+                                        <!-- Customized Quantity -->
+                                            <form action="../controller/product_controller.php?action=update-quantity" method="POST" class="d-flex justify-content-center align-items-center p-0">
+                                                <input type="hidden" name="productID" class="form-control text-center p-1" value="<?= $cart['productID'] ?>" style="font-size: small;">
+                                                <input type="text" name="productQuantity" class="form-control text-center p-1" value="<?= $cart['productQuantity'] ?>" style="font-size: small;">
+                                                <button type="submit" class="btn invisible p-0 m-0" style="width: auto; height: auto;"></button>
+                                            </form>
+                                            
+                                        <!-- Add -->
+                                            <form action="../controller/product_controller.php?action=add-quantity" method="POST"> 
+                                                    <input type="hidden" name="productID" value="<?= $cart['productID']?>"> 
+                                                    <button type="submit" class="btn btn-outline-secondary btn-sm mx-1" style="font-size: 0.75rem; line-height: 1;"> <i class="bi bi-plus"></i>
+                                                </button> 
+                                            </form>
+                                            
+                                        </div>
+                                    </td>
 
-                </select>
-              </div>
+                                     <td>
+                                     <form action="../controller/product_controller.php?action=update-quantity" method="POST" class="d-flex justify-content-center align-items-center p-0">
+                                                <input type="hidden" name="productID" class="form-control text-center p-1" value="<?= $product['productID'] ?>" style="font-size: small;">
+                                                <input type="text" name="productQuantity" class="form-control text-center p-1" value="<?= $product["productPrice"]?>" style="font-size: small;">
+                                                <button type="submit" class="btn invisible p-0 m-0" style="width: auto; height: auto;"></button>
+                                            </form>
+                                            
+                                    </td>
 
-              <div class="form-group mb-3">
-                  <label for="product-stocks">Stocks</label>
-                  <input 
-                  type="number"
-                  name="product-stocks" 
-                  min="1"
-                  max="99"
-                  class="form-control" 
-                  id="product-stocks"
-                  required>
-              </div>
+                                     <td>
+                                         <form action="../controller/product_controller.php?action=add-item" method="POST">
+                                             <input type="hidden" name="productID" value="<?= $product["productID"]?>">
+                                             <input type="hidden" name="productName" value="<?= $product["productName"]?>">
+                                             <input type="hidden" name="productCategory" value="<?= $product["categoryName"]?>">
+                                             <input type="hidden" name="productCategoryID" value="<?= $product["categoryID"]?>">
+                                             <input type="hidden" name="productPrice" value="<?= $product["productPrice"]?>">
+                                             
+                                             
+                                             <input type="hidden" name="productQuantity" value="1">
+                                             <button type="submit" name="submit" class="btn btn-danger">DELETE</button>
+                                         </form>
+                                     </td>
 
-              <div class="form-group mb-3">
-                  <label for="product-price">Price</label>
-                  <input 
-                  type="number"
-                  name="product-price" 
-                  min="1"
-                  max="30000"
-                  class="form-control" 
-                  id="product-price"
-                  required>
-              </div>
-
-              <button type="submit" class="btn btn-outline-primary">Add product</button>
-
-        
-              
-        </form>
+                                 </tr>
+                             <?php endforeach;?>
+                         </tbody>
+                 </table>
+             </div>
       </div>
     </div>
     </div>
