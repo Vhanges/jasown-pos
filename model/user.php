@@ -31,15 +31,32 @@ Class User{
                 self::setSession($user['roleDescription']);
                 //Redirect to their own page
                 self::getPage($user['roleDescription']);
+                
             }else{
                   header("Location: ../index.php");
             }
 
         }
 
-
-
     }
+
+    public static function logout(){
+        unset($_SESSION['user']);
+    }
+
+    public static function redirect(){
+        if($_SESSION['user'] === ADMIN){
+            header("Location: ../admin/admin_add_item.php");
+        } 
+        if($_SESSION['user'] === CASHIER){
+            header("Location: ../cashier/cashier.php");
+        } 
+        if($_SESSION['user'] !== ADMIN && $_SESSION['user'] !== ADMIN){
+            header("Location: ../index.php");
+        } 
+    }
+
+
 
     //To initialize the session of the logged in user
     public static function setSession($role){

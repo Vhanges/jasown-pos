@@ -2,17 +2,26 @@
 
 require_once '_init.php';
 
-function AutorizedUser(){
-    
-    switch($_SESSION['user']){
-        case ADMIN: 
-            header("Location: ../admin/admin_admin_item.php");
-            break;
-        case CASHIER: 
-            header("Location: ../cashier/cashier.php");
-            break;
-        default: 
-            header("Location: ../access_denied.php");
-            break;
+function Admin(){
+
+    if (isset($_SESSION['user'])){
+        
+        if($_SESSION['user'] !== ADMIN)
+        header("Location: ../access_denied.php"); 
+    } else{
+        header("Location: ../access_denied.php");
     }
+    
+}
+
+function Cashier(){
+
+    if (isset($_SESSION['user'])){
+        
+        if($_SESSION['user'] !== CASHIER)
+        header("Location: ../access_denied.php"); 
+    } else{
+        header("Location: ../access_denied.php");
+    }
+    
 }

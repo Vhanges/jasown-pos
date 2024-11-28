@@ -8,6 +8,7 @@ require_once(__DIR__ . '/model/cart.php');
 require_once(__DIR__ . '/model/product.php');
 require_once(__DIR__ . '/model/category.php');
 require_once(__DIR__ . '/model/user.php');
+require_once(__DIR__ . '/model/sales.php');
 
 
 

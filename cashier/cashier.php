@@ -2,7 +2,7 @@
 
 require_once __DIR__.'/../_init.php';
 
-AutorizedUser();
+// Cashier();
 
 $Products = new Product();
 

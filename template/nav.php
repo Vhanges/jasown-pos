@@ -10,7 +10,7 @@ echo "
             <img src='../assets/GC KRIZ BAKERY.png' width='70' height='70' class='d-inline-block' alt='Logo'>
             <h3 class='ms-3'>GCKRIZ BAKERY</h3>
         </div>
-        <a href='api/logout_controller.php' class='nav-links-item d-flex align-items-center p-3 bg-secondary text-white rounded shadow-sm'>
+        <a href='../controller/user_controller.php?action=logout' class='nav-links-item d-flex align-items-center p-3 bg-secondary text-white rounded shadow-sm'>
             <i class='bi bi-box-arrow-right me-2'></i>
             <span class='fw-bold'>Logout</span>
         </a>
@@ -22,4 +22,3 @@ echo "
 
 
 
-  

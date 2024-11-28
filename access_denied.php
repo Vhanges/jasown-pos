@@ -1,10 +1,15 @@
+<?php
+
+require_once __DIR__.'/_init.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>403 Forbidden</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+
     <style>
         body {
             display: flex;
@@ -49,7 +54,7 @@
     <div class="error-container">
         <h1 class="error-title">403 Forbidden</h1>
         <p class="error-message">You don't have permission to access this page.</p>
-        <a href="YOUR_SPECIFIC_PAGE_URL" class="btn back-button">Go Back</a>
+        <a href="controller/user_controller.php?action=redirect" class="btn back-button">Go Back</a>
     </div>
 </body>
 </html>

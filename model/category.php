@@ -16,6 +16,7 @@ class Category{
 
         $sql_command = "SELECT * FROM categories";
 
+        //Mas maganda gamitin ang prepared statement compared to direct Query
         $stmt = $connection->prepare($sql_command);
         $stmt->execute();
 

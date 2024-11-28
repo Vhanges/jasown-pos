@@ -10,21 +10,11 @@ $productPrice = isset($_POST['product-price']) ? htmlspecialchars( $_POST['produ
 switch(getAction('action')){
 
     case 'add': 
-
-        
-        try{
             Product::setItem($productName, $productCategory, productStocks: $productStocks, productPrice: $productPrice);
             header('Location: ../admin/admin_add_item.php');
-    
-        } catch (Exception $e){
-            
-        }
-
         break;
-
     default:
              header('Location: ../admin/admin_add_item.php');
         break;
  
-
 }
