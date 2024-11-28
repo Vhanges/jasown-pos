@@ -66,6 +66,48 @@ class Product{
 
 
     }
+
+    public static function setStock($productID, $productStocks){
+
+        global $connection;
+        
+        $sql_command = "UPDATE products SET productStocks = ? WHERE productID = '$productID'";
+        $stmt = $connection->prepare($sql_command);
+        $stmt->bind_param("i", $productStocks);
+        $stmt->execute();
+
+        //free up resources
+        $stmt->close();
+        $connection->close();
+        
+    }
+
+    public static function setPrice($productID, $productPrice){
+        global $connection;
+        
+        $sql_command = "UPDATE products SET productPrice = ? WHERE productID = '$productID'";
+        $stmt = $connection->prepare($sql_command);
+        $stmt->bind_param("d", $productPrice);
+        $stmt->execute();
+
+        //free up resources
+        $stmt->close();
+        $connection->close();
+    }
+
+    public static function deleteProduct($productID){
+
+        global $connection;
+        
+        $sql_command = "DELETE FROM products WHERE productID = '$productID'";
+        $stmt = $connection->prepare($sql_command);
+        $stmt->execute();
+
+        //free up resources
+        $stmt->close();
+        $connection->close();
+    }
+
    
 
 

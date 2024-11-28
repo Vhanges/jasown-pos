@@ -54,53 +54,38 @@ $Products = new Product();
                                      <td><?= $product["productName"]?></td>
 
                                      <td><?= $product["categoryName"]?></td>
-                                     
+
                                         <!-- Stocks -->
                                     <td style="font-size: small;">
                                         <div class="d-flex align-items-center"> 
                                             
-                                        <!-- Reduce -->
-                                            <form action="../controller/product_controller.php?action=subtract-quantity" method="POST"> 
-                                                <input type="hidden" name="productID" value="<?= $cart['productID'] ?>"> 
-                                                <button type="submit" class="btn btn-outline-secondary btn-sm mx-1" style="font-size: 0.75rem; line-height: 1;"> <i class="bi bi-dash"></i> </button> 
-                                            </form> 
-                                        
+                                      
                                         <!-- Customized Quantity -->
-                                            <form action="../controller/product_controller.php?action=update-quantity" method="POST" class="d-flex justify-content-center align-items-center p-0">
-                                                <input type="hidden" name="productID" class="form-control text-center p-1" value="<?= $cart['productID'] ?>" style="font-size: small;">
-                                                <input type="text" name="productQuantity" class="form-control text-center p-1" value="<?= $cart['productQuantity'] ?>" style="font-size: small;">
+                                            <form action="../controller/product_controller.php?action=update-stock" method="POST" class="d-flex justify-content-center align-items-center p-0">
+                                                <input type="hidden" name="product-id" class="form-control text-center p-1" value="<?= $product['productID'] ?>" style="font-size: small;">
+                                                <input type="number" min="0" name="product-stock" class="form-control text-center p-1" value="<?= $product['productStocks'] ?>" style="font-size: small;">
                                                 <button type="submit" class="btn invisible p-0 m-0" style="width: auto; height: auto;"></button>
                                             </form>
                                             
-                                        <!-- Add -->
-                                            <form action="../controller/product_controller.php?action=add-quantity" method="POST"> 
-                                                    <input type="hidden" name="productID" value="<?= $cart['productID']?>"> 
-                                                    <button type="submit" class="btn btn-outline-secondary btn-sm mx-1" style="font-size: 0.75rem; line-height: 1;"> <i class="bi bi-plus"></i>
-                                                </button> 
-                                            </form>
+                                      
                                             
                                         </div>
                                     </td>
 
                                      <td>
-                                     <form action="../controller/product_controller.php?action=update-quantity" method="POST" class="d-flex justify-content-center align-items-center p-0">
-                                                <input type="hidden" name="productID" class="form-control text-center p-1" value="<?= $product['productID'] ?>" style="font-size: small;">
-                                                <input type="text" name="productQuantity" class="form-control text-center p-1" value="<?= $product["productPrice"]?>" style="font-size: small;">
+                                     <form action="../controller/product_controller.php?action=update-price" method="POST" class="d-flex justify-content-center align-items-center p-0">
+                                                <input type="hidden" name="product-id" class="form-control text-center p-1" value="<?= $product['productID'] ?>" style="font-size: small;">
+                                                <input type="number" min="0" name="product-price" class="form-control text-center p-1" value="<?= $product["productPrice"]?>" style="font-size: small;">
                                                 <button type="submit" class="btn invisible p-0 m-0" style="width: auto; height: auto;"></button>
                                             </form>
                                             
                                     </td>
 
                                      <td>
-                                         <form action="../controller/product_controller.php?action=add-item" method="POST">
-                                             <input type="hidden" name="productID" value="<?= $product["productID"]?>">
-                                             <input type="hidden" name="productName" value="<?= $product["productName"]?>">
-                                             <input type="hidden" name="productCategory" value="<?= $product["categoryName"]?>">
-                                             <input type="hidden" name="productCategoryID" value="<?= $product["categoryID"]?>">
-                                             <input type="hidden" name="productPrice" value="<?= $product["productPrice"]?>">
-                                             
-                                             
-                                             <input type="hidden" name="productQuantity" value="1">
+                                         <form action="../controller/product_controller.php?action=delete-item" method="POST">
+                                             <input type="hidden" name="product-id" value="<?= $product["productID"]?>">
+                                             <input type="hidden" name="product-price" value="<?= $product["productPrice"]?>">                                             
+                                             <input type="hidden" name="product-stock" value="1">
                                              <button type="submit" name="submit" class="btn btn-danger">DELETE</button>
                                          </form>
                                      </td>
