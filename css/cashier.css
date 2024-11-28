@@ -3,24 +3,30 @@
 }
 
 .nav-links {
-justify-self: center;
-width: 250px;
-background-color: #f8f9fa;
-padding: 20px;
+    justify-self: center;
+    width: 250px;
+    background-color: #f8f9fa;
+    padding: 20px;
 }
 .nav-links-item {
-display: flex;
-align-items: center;
-padding: 10px;
-color: #000;
-text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    color: #000;
+    text-decoration: none;
 }
 .nav-links-item:hover {
-background-color: #e9ecef;
-border-radius: 5px;
+    background-color: #e9ecef;
+    border-radius: 5px;
 }
 .icon {
-width: 24px;
-height: 24px;
-margin-right: 10px;
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
 }
+
+.custom-separator { 
+    border-top: 1px solid #000; 
+    margin-top: 10px; margin-bottom: 10px; 
+}   
+

@@ -41,6 +41,7 @@ class Product{
             products.productID,
             products.productName,
             categories.categoryName,
+            products.categoryID,
             products.productStocks, 
             products.productPrice
         FROM products
@@ -49,7 +50,7 @@ class Product{
         ON
             products.categoryID = categories.categoryID";
             
-           $stmt = $connection->prepare($sql_command);
+        $stmt = $connection->prepare($sql_command);
         $stmt->execute();
 
         $result = $stmt->get_result();

@@ -29,21 +29,21 @@ require_once '_guards.php';
                   <h4 class="mt-1 mb-5 pb-1">Gckriz Bakery</h4>
                 </div>
 
-                <form>
+                <form action="../controller/login_controller.php" method="POST">
 
                   <div data-mdb-input-init class="form-outline mb-4">
-                    <label class="form-label" for="form2Example11">Username</label>
-                    <input type="email" id="form2Example11" class="form-control"
-                      placeholder="Username" />
+                    <label class="form-label" for="form2Example11">Email</label>
+                    <input type="email" name="email" id="form2Example11" class="form-control"
+                      placeholder="Email" />
                   </div>
 
                   <div data-mdb-input-init class="form-outline mb-4">
                     <label class="form-label" for="form2Example22">Password</label>
-                    <input type="password" id="form2Example22" class="form-control" />
+                    <input type="password" name="password" id="form2Example22" class="form-control" />
                   </div>
 
                   <div class="text-center pt-1 pb-1">
-                    <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary fa-lg w-100 " type="button">
+                    <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary fa-lg w-100 " type="submit">
                       Login
                     </button>
                   </div>

@@ -2,7 +2,10 @@
 
 require "../_init.php";
 
+AutorizedUser();
+
 $Category = new Category();
+
 ?>
 
 <!DOCTYPE html>

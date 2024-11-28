@@ -7,6 +7,7 @@ require_once '_guards.php';
 require_once(__DIR__ . '/model/cart.php');
 require_once(__DIR__ . '/model/product.php');
 require_once(__DIR__ . '/model/category.php');
+require_once(__DIR__ . '/model/user.php');
 
 
 
@@ -41,7 +42,7 @@ session_start();
             
             //Terminates the rest of the code
             die("
-            Error: Failed to connect to the database
+            Error: May problim sa imong database
             Reason: {$e->getMessage()} 
             Note:
                 - Try to open config.php and check if the MySQL is configured correctly.

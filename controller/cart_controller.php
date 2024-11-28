@@ -6,14 +6,17 @@ require_once '../_init.php';
 $productID = isset($_POST['productID']) ? htmlspecialchars($_POST['productID']) : '';
 $productName = isset($_POST['productName']) ? htmlspecialchars($_POST['productName']) : '';
 $productCategory = isset($_POST['productCategory']) ? htmlspecialchars($_POST['productCategory']) : '';
+$productCategoryID = isset($_POST['productCategoryID']) ? htmlspecialchars($_POST['productCategoryID']) : '';
 $productPrice = isset($_POST['productPrice']) ? htmlspecialchars($_POST['productPrice']) : '';
 $productQuantity = isset($_POST['productQuantity']) ? htmlspecialchars($_POST['productQuantity']) : '';
+
+$payment = isset($_POST['payment']) ? htmlspecialchars($_POST['payment']) : 'fsadf';
 
 $Cart = new Cart();
 
 switch(getAction('action')){
     case 'add-item':
-            $Cart->setCartItem($productID, $productName, $productCategory, productQuantity: $productQuantity, productPrice: $productPrice);
+            $Cart->setCartItem($productID, $productName, $productCategory, $productCategoryID, productQuantity: $productQuantity, productPrice: $productPrice);
             header("Location: ../cashier/cashier.php");
         break;
     case 'update-quantity':
@@ -32,6 +35,15 @@ switch(getAction('action')){
             $Cart->unsetCartItem($productID);
             header("Location: ../cashier/cashier.php");
         break;
+    case 'calculate-change':
+            $Cart->setPayment($payment);
+            header("Location: ../cashier/cashier.php");
+        break;
+    case 'process-order':
+            $Cart->setOrder();
+            header("Location: ../cashier/cashier.php");
+        break;
+    
     case 'display-items':
             $Cart->getAllItems();
             header("Location: ../cashier/cashier.php");
