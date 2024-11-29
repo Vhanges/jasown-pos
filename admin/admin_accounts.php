@@ -33,14 +33,7 @@ $User = new User();
         <!-- Second column content -->
         <h4>Add New user</h4>
         <hr>
-        <form action="../controller/user_controller.php?action=<?=isset($_POST['user-id']) ? 'update-user' : 'add-user'?>
-        &user-id=<?= isset($_POST['user-id']) ? htmlspecialchars($_POST['user-id']) : '' ?>
-        &name=<?= isset($_POST['name']) ? htmlspecialchars($_POST['name']) : '' ?>
-        &role-id=<?= isset($_POST['role-id']) ? htmlspecialchars($_POST['role-id']) : '' ?>
-        &role-desc=<?= isset($_POST['role-desc']) ? htmlspecialchars($_POST['role-desc']) : '' ?>
-        &email=<?= isset($_POST['email']) ? htmlspecialchars($_POST['email']) : '' ?>
-        &password=<?= isset($_POST['password']) ? htmlspecialchars($_POST['password']) : '' ?>"
-        method="POST" class="d-flex flex-column border p-2 border-secondary-subtle w-50">
+        <form action="../controller/user_controller.php?action=<?=isset($_POST['user-id']) ? 'update-user' : 'add-user'?>" method="POST" class="d-flex flex-column border p-2 border-secondary-subtle w-50">
  
 
               <div class="form-group mb-3">

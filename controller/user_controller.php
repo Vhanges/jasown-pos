@@ -11,6 +11,12 @@ $userRole = isset($_POST['user-role']) ? htmlspecialchars($_POST['user-role']) :
 $userEmail = isset($_POST['user-email']) ? htmlspecialchars($_POST['user-email']) : '';
 $userPassword = isset($_POST['user-password']) ? htmlspecialchars($_POST['user-password']) : '';
 
+
+// var_dump($userID);
+// var_dump($userName);
+// var_dump($userRole);
+// var_dump($userEmail);
+// var_dump($userPassword);
 switch(getAction('action')){
     case 'login':
             User::login($email, $password);
