@@ -77,7 +77,7 @@ $Sales = new Sales();
                                      <td><?= $sales["orderID"]?></td>
                                      <td><?= $sales["productName"]?></td>
                                      <td><?= $sales["categoryName"]?></td>
-                                     <td><?= $sales["productStocks"]?></td>
+                                     <td><?= $sales["quantity"]?></td>
                                      <td><?= $sales["productPrice"]?></td>
                                  </tr>
                              <?php endforeach;?>

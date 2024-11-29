@@ -9,6 +9,7 @@ $productStocks = isset($_POST['product-stock']) ? htmlspecialchars( $_POST['prod
 $productPrice = isset($_POST['product-price']) ? htmlspecialchars( $_POST['product-price']) : '';
 
 
+
 switch(getAction('action')){
 
     case 'add': 

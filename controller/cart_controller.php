@@ -14,6 +14,7 @@ $payment = isset($_POST['payment']) ? htmlspecialchars($_POST['payment']) : '';
 
 $Cart = new Cart();
 
+
 switch(getAction('action')){
     case 'add-item':
             $Cart->setCartItem($productID, $productName, $productCategory, $productCategoryID, productQuantity: $productQuantity, productPrice: $productPrice);

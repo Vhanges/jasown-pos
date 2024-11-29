@@ -103,6 +103,26 @@ Class User{
 
     }
 
+    public static function getAllRoles(){
+        
+        global $connection;
+
+        $sql_command = "SELECT * FROM roles";
+        $stmt = $connection->prepare($sql_command);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
+        $data = $result->fetch_all(MYSQLI_ASSOC);
+
+        //free up resources
+        $result->free();
+        $stmt->close();
+
+        return $data;
+
+    }
+
 
     public static function addAccount($roleID, $name, $email, $password){
         global $connection;
@@ -122,6 +142,19 @@ Class User{
         $sql_command = "UPDATE users SET roleID = ?, name = ?, email = ?, password = ? WHERE userID = ?";
         $stmt = $connection->prepare($sql_command);
         $stmt->bind_param("isssi", $roleID, $name, $email, $password, $userID);
+        $stmt->execute();
+
+        //free up resources
+        $stmt->close();
+
+    }
+
+    public static function deleteAccount($userID){
+        global $connection;
+
+        $sql_command = "DELETE FROM users WHERE userID = '$userID'";
+        $stmt = $connection->prepare($sql_command);
+
         $stmt->execute();
 
         //free up resources

@@ -33,69 +33,69 @@ $User = new User();
         <!-- Second column content -->
         <h4>Add New user</h4>
         <hr>
-        <form action="../controller/user_controller.php?action=<?=isset($_GET['user-id']) ? 'update-user' : 'add-user'?>&user-id=<?=isset($_GET['user-id']) ? $_GET['user-id'] : ''?>" method="POST" class="d-flex flex-column border p-2 border-secondary-subtle w-50">
+        <form action="../controller/user_controller.php?action=<?=isset($_POST['user-id']) ? 'update-user' : 'add-user'?>
+        &user-id=<?= isset($_POST['user-id']) ? htmlspecialchars($_POST['user-id']) : '' ?>
+        &name=<?= isset($_POST['name']) ? htmlspecialchars($_POST['name']) : '' ?>
+        &role-id=<?= isset($_POST['role-id']) ? htmlspecialchars($_POST['role-id']) : '' ?>
+        &role-desc=<?= isset($_POST['role-desc']) ? htmlspecialchars($_POST['role-desc']) : '' ?>
+        &email=<?= isset($_POST['email']) ? htmlspecialchars($_POST['email']) : '' ?>
+        &password=<?= isset($_POST['password']) ? htmlspecialchars($_POST['password']) : '' ?>"
+        method="POST" class="d-flex flex-column border p-2 border-secondary-subtle w-50">
  
+
               <div class="form-group mb-3">
                   <label for="user-name">Account Name</label>
 
                   <input 
                   type="hidden"
                   name="user-id"
-                  value="<?=isset($_GET['user-id']) ? $_GET['user-id'] : ''?>">
+                  value="<?=isset($_POST['user-id']) ? $_POST['user-id'] : ''?>">
+                  <!-- <pre>
+                    <?php //var_dump($_POST['user-id'])?>
+                  </pre> -->
 
                   <input 
                   type="text"
                   name="user-name"
                   class="form-control"  
                   id="user-name" 
-                  value="<?=isset($_GET['user-name']) ? $_GET['user-name'] : ''?>"
+                  value="<?=isset($_POST['name']) ? $_POST['name'] : ''?>"
                   required>
               </div>
 
               <div class="form-group mb-3">
-                <label for="product-user">Role</label>
-                <select name="product-user" id="product-user" class="form-control" required>php
+                <label for="user-role">Role</label>
+                <select name="user-role" id="user-role" class="form-control" required>php
                     
                     <option value="">--Type of User--</option>
                    
-                    <?php foreach($User->getAll() as $user) : ?>
-                    <option value="<?= $user['userID']?>"><?= $user['roleDescription']?></option>
+                    <?php foreach($User->getAllRoles() as $user) : ?>
+                    <option value="<?= $user['roleID']?>"><?= $user['roleDescription']?></option>
                     <?php endforeach; ?>
 
                 </select>
               </div>
 
               <div class="form-group mb-3">
-                  <label for="user-name">Email</label>
-
-                  <input 
-                  type="hidden"
-                  name="user-id"
-                  value="<?=isset($_GET['user-id']) ? $_GET['user-id'] : ''?>">
+                  <label for="user-email">Email</label>
 
                   <input 
                   type="text"
-                  name="user-name"
+                  name="user-email"
                   class="form-control"  
                   id="user-name" 
-                  value="<?=isset($_GET['user-name']) ? $_GET['user-name'] : ''?>"
+                  value="<?=isset($_POST['email']) ? $_POST['email'] : ''?>"
                   required>
               </div>
 
               <div class="form-group mb-3">
-                  <label for="user-name">Password</label>
-
-                  <input 
-                  type="hidden"
-                  name="user-id"
-                  value="<?=isset($_GET['user-id']) ? $_GET['user-id'] : ''?>">
-
+                  <label for="user-password">Password</label>
                   <input 
                   type="text"
-                  name="user-name"
+                  name="user-password"
                   class="form-control"  
                   id="user-name" 
-                  value="<?=isset($_GET['user-name']) ? $_GET['user-name'] : ''?>"
+                  value="<?=isset($_POST['password']) ? $_POST['password'] : ''?>"
                   required>
               </div>
 
@@ -131,17 +131,20 @@ $User = new User();
 
                                      <td class="d-flex flex-row">
 
-                                                                                 <a href="?action=update-user&user-name=<?=$user["name"]?>&user-id=<?=$user["userID"]?>" class="btn btn-primary">EDIT</a>
+                                     <form action="admin_accounts.php" method="POST">
+                                        <input type="hidden" name="user-id" value="<?= $user['userID'] ?>">
+                                        <input type="hidden" name="name" value="<?= $user['name'] ?>">
+                                        <input type="hidden" name="role-id" value="<?= $user['roleID'] ?>">
+                                        <input type="hidden" name="role-desc" value="<?= $user['roleDescription'] ?>">
+                                        <input type="hidden" name="email" value="<?= $user['email'] ?>">
+                                        <input type="hidden" name="password" value="<?= $user['password'] ?>">
 
-                                         <form action="../controller/user_controller.php?action=delete-user" method="POST" class="mx-2">
-                                          <!-- <pre>
-                                            <?php //var_dump($user["name"])?>
-                                          </pre> -->
-                                             <input type="hidden" name="user-id" value="<?= $user["userID"]?>">
-                                             <button type="submit" name="submit" class="btn btn-danger">DELETE</button>
-                                         </form>
-                                     </td>
-                                         <a href="?action=update-user&user-name=<?=$user["name"]?>&user-id=<?=$user["userID"]?>" class="btn btn-primary">EDIT</a>
+                                        <!-- <pre>
+                                            <?php //var_dump($user['userID'])?>
+                                        </pre> -->
+                                        <button type="submit" name="submit" class="btn btn-primary">EDIT</button>
+                                     </form>
+
 
                                          <form action="../controller/user_controller.php?action=delete-user" method="POST" class="mx-2">
                                           <!-- <pre>

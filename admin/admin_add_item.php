@@ -59,14 +59,14 @@ $Category = new Category();
               </div>
 
               <div class="form-group mb-3">
-                  <label for="product-stocks">Stocks</label>
+                  <label for="product-stock">Stocks</label>
                   <input 
                   type="number"
-                  name="product-stocks" 
+                  name="product-stock" 
                   min="1"
                   max="99"
                   class="form-control" 
-                  id="product-stocks"
+                  id="product-stock"
                   required>
               </div>
 
