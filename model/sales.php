@@ -12,7 +12,11 @@ Class Sales{
         $result = $stmt->get_result();
 
         $sales = $result->fetch_assoc();
-
+        
+        //free up resources
+        $result->free();
+        $stmt->close();
+        
         return $sales['salesToday'];
 
     }
@@ -27,9 +31,15 @@ Class Sales{
 
         $sales = $result->fetch_assoc();
         
-        return $sales['totalSales'];
+        $data = $sales['totalSales'];
+        //free up resources
+        $result->free();
+        $stmt->close();
+
+        return $data;
     }
     public static function getTransactionList(){
+
         global $connection;
 
         $sql_command = "
@@ -44,12 +54,13 @@ Class Sales{
 
         $result = $stmt->get_result();
         $sales = $result->fetch_all(MYSQLI_ASSOC);
-
+        
+        //free up resources
+        $result->free();
+        $stmt->close();
+        
         return $sales;
         
-
-
-
     }
 
     

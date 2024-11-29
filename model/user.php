@@ -38,6 +38,11 @@ Class User{
 
         }
 
+        //free up resources
+        $result->free();
+        $stmt->close();
+        $connection->close(); 
+
     }
 
     public static function logout(){
@@ -76,5 +81,51 @@ Class User{
             header("Location: ../cashier/cashier.php");
         }
         
+    }
+
+    public static function getAll(){
+        
+        global $connection;
+
+        $sql_command = "SELECT * FROM users INNER JOIN roles on users.roleID = roles.roleID";
+        $stmt = $connection->prepare($sql_command);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
+        $data = $result->fetch_all(MYSQLI_ASSOC);
+
+        //free up resources
+        $result->free();
+        $stmt->close();
+
+        return $data;
+
+    }
+
+
+    public static function addAccount($roleID, $name, $email, $password){
+        global $connection;
+
+        $sql_command = "INSERT INTO users (roleID, name, email, password) VALUES (?, ?, ?, ?)";
+        $stmt = $connection->prepare($sql_command);
+        $stmt->bind_param("isss", $roleID, $name, $email, $password);
+        $stmt->execute();
+
+        //free up resources
+        $stmt->close();
+
+    }
+    public static function updateAccount($userID, $roleID, $name, $email, $password){
+        global $connection;
+
+        $sql_command = "UPDATE users SET roleID = ?, name = ?, email = ?, password = ? WHERE userID = ?";
+        $stmt = $connection->prepare($sql_command);
+        $stmt->bind_param("isssi", $roleID, $name, $email, $password, $userID);
+        $stmt->execute();
+
+        //free up resources
+        $stmt->close();
+
     }
 }
