@@ -82,10 +82,8 @@ $Products = new Product();
                                     </td>
 
                                      <td>
-                                         <form action="../controller/product_controller.php?action=delete-item" method="POST">
+                                         <form action="../controller/product_controller.php?action=delete-product" method="POST">
                                              <input type="hidden" name="product-id" value="<?= $product["productID"]?>">
-                                             <input type="hidden" name="product-price" value="<?= $product["productPrice"]?>">                                             
-                                             <input type="hidden" name="product-stock" value="1">
                                              <button type="submit" name="submit" class="btn btn-danger">DELETE</button>
                                          </form>
                                      </td>

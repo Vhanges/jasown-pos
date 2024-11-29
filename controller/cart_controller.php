@@ -10,7 +10,7 @@ $productCategoryID = isset($_POST['productCategoryID']) ? htmlspecialchars($_POS
 $productPrice = isset($_POST['productPrice']) ? htmlspecialchars($_POST['productPrice']) : '';
 $productQuantity = isset($_POST['productQuantity']) ? htmlspecialchars($_POST['productQuantity']) : '';
 
-$payment = isset($_POST['payment']) ? htmlspecialchars($_POST['payment']) : 'fsadf';
+$payment = isset($_POST['payment']) ? htmlspecialchars($_POST['payment']) : '';
 
 $Cart = new Cart();
 

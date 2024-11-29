@@ -34,4 +34,42 @@ class Category{
         return $data;
     }
 
+    public static function addCategory($categoryName){
+        global $connection;
+
+        $sql_command = "INSERT INTO categories (categoryName) VALUES (?)";
+
+        $stmt = $connection->prepare($sql_command);
+        $stmt->bind_param("s", $categoryName);
+        $stmt->execute();
+
+        $stmt->close();
+        $connection->close();
+
+    }
+    public static function updateCategory($categoryID, $categoryName){
+        global $connection;
+
+        $sql_command = "UPDATE categories SET categoryName = ? WHERE categoryID = ?";
+
+        $stmt = $connection->prepare($sql_command);
+        $stmt->bind_param("si", $categoryName, $categoryID);
+        $stmt->execute();
+
+        $stmt->close();
+        $connection->close();
+
+    }
+    public static function deleteCategory($categoryID){
+        global $connection;
+
+        $sql_command = "DELETE FROM categories WHERE categoryID = '$categoryID'";
+
+        $stmt = $connection->prepare($sql_command);
+        $stmt->execute();
+
+        $stmt->close();
+        $connection->close();
+    }
+
 }

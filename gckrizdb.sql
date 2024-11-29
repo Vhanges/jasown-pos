@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 28, 2024 at 01:16 PM
+-- Generation Time: Nov 29, 2024 at 12:49 AM
 -- Server version: 8.0.40
 -- PHP Version: 8.2.20
 
@@ -38,7 +38,7 @@ CREATE TABLE `categories` (
 
 INSERT INTO `categories` (`categoryID`, `categoryName`) VALUES
 (1, 'Pastry'),
-(2, 'Cake');
+(2, 'Bread');
 
 -- --------------------------------------------------------
 
@@ -110,17 +110,15 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`productID`, `productName`, `categoryID`, `productStocks`, `productPrice`) VALUES
-(1, 'AAAAAAAAAAAA', 1, 23, 31),
-(2, 'Ang totoong tinapay', 2, 7, 7),
+(1, 'AAAAAAAAAAAA', 1, 30, 340),
+(2, 'Ang totoong tinapay', 2, 500, 500),
 (3, 'Ang anak ng tinapay', 2, 77, 77),
 (4, 'Ang ninong ng tinapay', 1, 2, 1),
 (5, 'Ang asawa ng tinapay', 2, 77, 77),
 (25, '1', 1, 1, 1),
 (26, '2', 1, 2, 2),
 (27, '3', 1, 3, 3),
-(28, '4', 1, 4, 4),
-(29, '5', 1, 5, 5),
-(30, '23', 2, 2, 2);
+(28, '4', 1, 4, 4);
 
 -- --------------------------------------------------------
 
@@ -211,7 +209,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `categoryID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `categoryID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `orderdetails`

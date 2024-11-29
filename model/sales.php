@@ -26,7 +26,7 @@ Class Sales{
         $result = $stmt->get_result();
 
         $sales = $result->fetch_assoc();
-
+        
         return $sales['totalSales'];
     }
     public static function getTransactionList(){
