@@ -2,7 +2,7 @@
 
 require "../_init.php";
 
-// Admin();
+Admin();
 
 $Category = new Category();
 

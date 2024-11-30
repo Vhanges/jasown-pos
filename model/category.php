@@ -27,7 +27,7 @@ class Category{
         //free up resources
         $stmt->close();
         $result->free();
-        $connection->close();
+        
 
         
         
@@ -44,7 +44,7 @@ class Category{
         $stmt->execute();
 
         $stmt->close();
-        $connection->close();
+        
 
     }
     public static function updateCategory($categoryID, $categoryName){
@@ -57,7 +57,7 @@ class Category{
         $stmt->execute();
 
         $stmt->close();
-        $connection->close();
+        
 
     }
     public static function deleteCategory($categoryID){
@@ -69,7 +69,7 @@ class Category{
         $stmt->execute();
 
         $stmt->close();
-        $connection->close();
+        
     }
 
 }

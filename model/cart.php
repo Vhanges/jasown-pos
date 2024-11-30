@@ -188,7 +188,7 @@ class Cart{
 
             //freeeeee
             $stmt->close();
-            $connection->close();
+            
 
             //Clear the Cart and texts
 

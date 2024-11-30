@@ -1,8 +1,10 @@
 <?php 
 
 require "../_init.php";
+      
+Admin();
 
-// Admin();
+  
 
 $Category = new Category();
 $Products = new Product();
@@ -58,7 +60,7 @@ $Products = new Product();
                     ?> 
                     </pre> -->
 
-              <button type="submit" class="btn btn-outline-primary">Add category</button>
+              <button type="submit" class="btn btnine-primary">Add category</button>
          
         </form>
         <!-- Third column -->
@@ -78,12 +80,14 @@ $Products = new Product();
                      </thead>
                          <tbody>
                              <?php foreach($Category->getAll() as $category) : ?>
-                                 <tr class="align-middle">
+               -outl                  <tr class="align-middle">
                                      <td><?= $category["categoryName"]?></td> 
 
                                      <td class="d-flex flex-row">
 
-                                         <a href="?action=update-category&category-name=<?=$category["categoryName"]?>&category-id=<?=$category["categoryID"]?>" class="btn btn-primary">EDIT</a>
+                                         <a href="?action=update-category&
+                                         category-name=<?=$category["categoryName"]?>&
+                                         category-id=<?=$category["categoryID"]?>" class="btn btn-primary">EDIT</a>
 
                                          <form action="../controller/category_controller.php?action=delete-category" method="POST" class="mx-2">
                                           <!-- <pre>

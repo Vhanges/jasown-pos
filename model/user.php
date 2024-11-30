@@ -41,7 +41,7 @@ Class User{
         //free up resources
         $result->free();
         $stmt->close();
-        $connection->close(); 
+        
 
     }
 
@@ -50,15 +50,20 @@ Class User{
     }
 
     public static function redirect(){
-        if($_SESSION['user'] === ADMIN){
-            header("Location: ../admin/admin_add_item.php");
-        } 
-        if($_SESSION['user'] === CASHIER){
-            header("Location: ../cashier/cashier.php");
-        } 
-        if($_SESSION['user'] !== ADMIN && $_SESSION['user'] !== ADMIN){
+
+        if(isset($_SESSION['user'])){
+
+            if($_SESSION['user'] == ADMIN){
+                header("Location: ../admin/admin_add_item.php");
+            } 
+            if($_SESSION['user'] == CASHIER){
+                header("Location: ../cashier/cashier.php");
+            }
+
+        }else{
             header("Location: ../index.php");
-        } 
+        }
+
     }
 
 

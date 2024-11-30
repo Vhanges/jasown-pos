@@ -1,11 +1,11 @@
 <?php
 require_once '../_init.php';
 
-
+//Add Category
 $categoryName = isset($_POST['category-name']) ? htmlspecialchars($_POST['category-name']) : '';
 $categoryID = isset($_POST['category-id']) ? htmlspecialchars($_POST['category-id']) : '';
 
-
+//Edit Category
 $updateCategoryName = isset($_POST['category-name']) ? htmlspecialchars($_POST['category-name']) : '';
 $updateCategoryID = isset($_GET['category-id']) ? htmlspecialchars($_GET['category-id']) : '';
 

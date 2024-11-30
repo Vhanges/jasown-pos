@@ -2,6 +2,8 @@
 
 require_once __DIR__.'/../_init.php';
 
+Cashier();
+
 
 //Instantiate the Classes to be used
 

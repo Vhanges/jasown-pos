@@ -26,7 +26,7 @@ class Product{
         $stmt->execute();
 
         $stmt->close();
-        $connection->close();
+        
 
         
 
@@ -60,7 +60,7 @@ class Product{
         //free up resources
         $result->free();
         $stmt->close();
-        $connection->close();
+        
 
         return $data; 
 
@@ -78,7 +78,7 @@ class Product{
 
         //free up resources
         $stmt->close();
-        $connection->close();
+        
         
     }
 
@@ -92,7 +92,7 @@ class Product{
 
         //free up resources
         $stmt->close();
-        $connection->close();
+        
     }
 
     public static function deleteProduct($productID){
@@ -105,7 +105,7 @@ class Product{
 
         //free up resources
         $stmt->close();
-        $connection->close();
+        
     }
 
    

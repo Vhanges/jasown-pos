@@ -37,6 +37,9 @@ switch(getAction('action')){
             User::deleteAccount($userID);
             header('Location: ../admin/admin_accounts.php');
         break;
+    case 'redirect':
+            User::redirect();
+        break;
     default :
             header('Location: ../admin/admin_accounts.php');
         break;

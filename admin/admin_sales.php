@@ -2,7 +2,7 @@
 
 require "../_init.php";
 
-// Admin();
+Admin();
 
 $Sales = new Sales();
 
