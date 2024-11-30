@@ -29,6 +29,7 @@ require_once '_guards.php';
                   <h4 class="mt-1 mb-5 pb-1">Gckriz Bakery</h4>
                 </div>
 
+                <!-- Once logged in the server will the direct the user to their destined page -->
                 <form action="../controller/user_controller.php?action=login" method="POST">
 
                   <div data-mdb-input-init class="form-outline mb-4">

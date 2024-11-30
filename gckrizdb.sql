@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 29, 2024 at 12:49 AM
+-- Generation Time: Nov 29, 2024 at 03:14 AM
 -- Server version: 8.0.40
 -- PHP Version: 8.2.20
 
@@ -38,7 +38,8 @@ CREATE TABLE `categories` (
 
 INSERT INTO `categories` (`categoryID`, `categoryName`) VALUES
 (1, 'Pastry'),
-(2, 'Bread');
+(2, 'Bread'),
+(6, 'Cookies');
 
 -- --------------------------------------------------------
 
@@ -68,7 +69,14 @@ INSERT INTO `orderdetails` (`orderDetailID`, `orderID`, `productID`, `categoryID
 (17, 13, 26, 1, 1),
 (18, 13, 25, 1, 2),
 (19, 13, 4, 1, 2),
-(20, 14, 26, 1, 1);
+(20, 14, 26, 1, 1),
+(21, 15, 1, 1, 1),
+(22, 17, 3, 2, 1),
+(23, 18, 25, 1, 1),
+(24, 18, 4, 1, 1),
+(25, 18, 1, 1, 1),
+(26, 18, 2, 2, 1),
+(27, 18, 3, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -89,7 +97,11 @@ CREATE TABLE `orders` (
 INSERT INTO `orders` (`orderID`, `orderDate`, `totalPayment`) VALUES
 (12, '2024-11-28 11:44:48', 238),
 (13, '2024-11-28 11:57:43', 3324),
-(14, '2024-11-28 11:58:51', 2);
+(14, '2024-11-28 11:58:51', 2),
+(15, '2024-11-29 10:47:56', 340),
+(16, '2024-11-29 10:50:04', 77),
+(17, '2024-11-29 10:50:28', 77),
+(18, '2024-11-29 11:04:12', 948);
 
 -- --------------------------------------------------------
 
@@ -110,15 +122,17 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`productID`, `productName`, `categoryID`, `productStocks`, `productPrice`) VALUES
-(1, 'AAAAAAAAAAAA', 1, 30, 340),
+(1, 'AAAAAAAAAAAA', 1, 40, 340),
 (2, 'Ang totoong tinapay', 2, 500, 500),
 (3, 'Ang anak ng tinapay', 2, 77, 77),
 (4, 'Ang ninong ng tinapay', 1, 2, 1),
 (5, 'Ang asawa ng tinapay', 2, 77, 77),
-(25, '1', 1, 1, 1),
+(25, '1', 1, 1, 30),
 (26, '2', 1, 2, 2),
 (27, '3', 1, 3, 3),
-(28, '4', 1, 4, 4);
+(28, '4', 1, 4, 4),
+(31, 'malupit na TINAPAY 2.0', 6, 0, 6),
+(32, 'malupit na TINAPAY 2.03', 2, 0, 6);
 
 -- --------------------------------------------------------
 
@@ -158,8 +172,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`userID`, `roleID`, `name`, `email`, `password`) VALUES
-(1, '1', 'Angelo Sibin', 'vhanges7777@gmail.com', 'adminpassword'),
-(2, '2', 'Kashier', 'banjis@gmail.com', 'cashierpassword');
+(1, '1', 'Angelo Sibin2', 'vhanges7777@gmail.com', 'adminpassword'),
+(3, '2', 'Kashier', 'banjis@gmail.com', 'cashierpassword');
 
 --
 -- Indexes for dumped tables
@@ -209,25 +223,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `categoryID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `categoryID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `orderdetails`
 --
 ALTER TABLE `orderdetails`
-  MODIFY `orderDetailID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `orderDetailID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `orderID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `orderID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `productID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `productID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -239,7 +253,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `userID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

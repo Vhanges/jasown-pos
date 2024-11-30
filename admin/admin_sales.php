@@ -53,8 +53,8 @@ $Sales = new Sales();
              </div>
         
             <!-- Second Row -->
-            <div class="row" style="height: 70vh; width: 70vw;">
-            <div class="col-12 d-flex flex-column align-items-center justify-content-start border border-secondary bg-white border-secondary-subtle p-3 m-4 ">
+            <div class="row" style="height: 70vh; width: 70vw; ">
+            <div class="col-12 d-flex flex-column align-items-center justify-content-start border border-secondary bg-white border-secondary-subtle p-3 m-4 " style="max-height: 70vh; overflow: auto; ">
              
              <div class="d-flex justify-content-center align-items-center w-100 mb-2 border-bottom border-2 border-subtle" style="height: 70px">
                  <h4 class="mb-0 text-center">Transactions</h4>

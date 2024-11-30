@@ -2,7 +2,8 @@
 
 require_once __DIR__.'/../_init.php';
 
-// Cashier();
+
+//Instantiate the Classes to be used
 
 $Products = new Product();
 
@@ -23,16 +24,18 @@ $CartItems = $Cart->getAllItems();
     <?php cashier_css()?>
 </head>
 <body>
+
     <?php require "../template/nav.php";?>
 
     <div class="container-fluid full-vh-vw bg-light">
         <div class="row h-100"> 
 
-            <div class="col-7 d-flex flex-column align-items-center justify-content-start border border-secondary bg-white border-secondary-subtle p-3 m-4 ">
-             
-            <div class="d-flex justify-content-center align-items-center w-100 mb-2 border-bottom border-2 border-subtle" style="height: 70px">
-                <h4 class="mb-0 text-center">Products</h4>
-            </div>
+            <!-- Product Table Container -->
+
+            <div class="col-7 d-flex flex-column align-items-center justify-content-start border border-secondary bg-white border-secondary-subtle p-3 m-4 "> 
+                <div class="d-flex justify-content-center align-items-center w-100 mb-2 border-bottom border-2 border-subtle" style="height: 70px">
+                    <h4 class="mb-0 text-center">Products</h4>
+                </div>
 
 
                 <table class="table table-responsive table-hover">
@@ -46,6 +49,12 @@ $CartItems = $Cart->getAllItems();
                         </tr>
                     </thead>
                         <tbody>
+
+                            <!-- 
+                            Displays list of product to the table via iterating  using loop.
+                            The data is fetched via the function getAll 
+                            -->
+
                             <?php foreach($Products->getAll() as $product) : ?>
                                 <tr class="align-middle">
                                     <td><?= $product["productName"]?></td>
@@ -53,6 +62,8 @@ $CartItems = $Cart->getAllItems();
                                     <td><?= $product["productStocks"]?></td>
                                     <td><?= $product["productPrice"]?></td>
                                     <td>
+                                        
+
                                         <form action="../controller/cart_controller.php?action=add-item" method="POST">
                                             <input type="hidden" name="productID" value="<?= $product["productID"]?>">
                                             <input type="hidden" name="productName" value="<?= $product["productName"]?>">
@@ -64,6 +75,7 @@ $CartItems = $Cart->getAllItems();
                                             <input type="hidden" name="productQuantity" value="1">
                                             <button type="submit" name="submit" class="btn btn-primary">ADD</button>
                                         </form>
+
                                     </td>
                                 </tr>
                             <?php endforeach;?>
@@ -72,6 +84,7 @@ $CartItems = $Cart->getAllItems();
             </div>
 
 
+            <!-- Cart Container -->
             <div class="col-4 d-flex flex-column align-items-center justify-content-start border border-secondary bg-white border-secondary-subtle px-1 py-3 mt-4 mb-4">
                
                 <div class="d-flex justify-content-center align-content-center w-100 mb-2 border-bottom border-2 border-subtle">                    
@@ -85,73 +98,76 @@ $CartItems = $Cart->getAllItems();
 
                 
 
+                <!-- Table Container -->
                 <div style="height: 65vh; max-height: 65vh; max-width: 50vw; overflow: auto;">
                     <table class="table table-responsive order-secondary-subtle bg-transparent">
                     
                         <tbody>
+                            
                             <!-- <pre>
-    
                                 <?php // var_dump($CartItems); ?>
                             </pre> -->
-                            <?php foreach($CartItems as $cart): ?>
 
-                            <tr class="align-middle">
-                                
-                                <!-- Product Name -->
-                                <td style="font-size: small;">
-                                    <span class="mx-2">
-                                        <?=$cart['productName']?> (<?=$cart['productCategory']?>)
-                                    </span>
-                                </td>
-                                
-                                
-                                <!-- Quantity -->
-                                <td style="font-size: small;">
-                                    <div class="d-flex align-items-center"> 
-                                        
-                                    <!-- Reduce -->
-                                        <form action="../controller/cart_controller.php?action=subtract-quantity" method="POST"> 
-                                            <input type="hidden" name="productID" value="<?= $cart['productID'] ?>"> 
-                                            <button type="submit" class="btn btn-outline-secondary btn-sm mx-1" style="font-size: 0.75rem; line-height: 1;"> <i class="bi bi-dash"></i> </button> 
-                                        </form> 
+                                Display all the data in the session
+                                <?php foreach($CartItems as $cart): ?>
+
+                                <tr class="align-middle">
                                     
-                                    <!-- Customized Quantity -->
-                                        <form action="../controller/cart_controller.php?action=update-quantity" method="POST" class="d-flex justify-content-center align-items-center p-0">
-                                            <input type="hidden" name="productID" class="form-control text-center p-1" value="<?= $cart['productID'] ?>" style="font-size: small;">
-                                             <input type="text" name="productQuantity" class="form-control text-center p-1" value="<?= $cart['productQuantity'] ?>" style="font-size: small;">
-                                             <button type="submit" class="btn invisible p-0 m-0" style="width: auto; height: auto;"></button>
-                                        </form>
+                                    <!-- Product Name -->
+                                    <td style="font-size: small;">
+                                        <span class="mx-2">
+                                            <?=$cart['productName']?> (<?=$cart['productCategory']?>)
+                                        </span>
+                                    </td>
+                                    
+                                    
+                                    <!-- Quantity -->
+                                    <td style="font-size: small;">
+                                        <div class="d-flex align-items-center"> 
+                                            
+                                        <!-- Reduce -->
+                                            <form action="../controller/cart_controller.php?action=subtract-quantity" method="POST"> 
+                                                <input type="hidden" name="productID" value="<?= $cart['productID'] ?>"> 
+                                                <button type="submit" class="btn btn-outline-secondary btn-sm mx-1" style="font-size: 0.75rem; line-height: 1;"> <i class="bi bi-dash"></i> </button> 
+                                            </form> 
                                         
-                                    <!-- Add -->
-                                        <form action="../controller/cart_controller.php?action=add-quantity" method="POST"> 
-                                                <input type="hidden" name="productID" value="<?= $cart['productID']?>"> 
-                                                <button type="submit" class="btn btn-outline-secondary btn-sm mx-1" style="font-size: 0.75rem; line-height: 1;"> <i class="bi bi-plus"></i>
-                                            </button> 
+                                        <!-- Customized Quantity -->
+                                            <form action="../controller/cart_controller.php?action=update-quantity" method="POST" class="d-flex justify-content-center align-items-center p-0">
+                                                <input type="hidden" name="productID" class="form-control text-center p-1" value="<?= $cart['productID'] ?>" style="font-size: small;">
+                                                <input type="text" name="productQuantity" class="form-control text-center p-1" value="<?= $cart['productQuantity'] ?>" style="font-size: small;">
+                                                <button type="submit" class="btn invisible p-0 m-0" style="width: auto; height: auto;"></button>
+                                            </form>
+                                            
+                                        <!-- Add -->
+                                            <form action="../controller/cart_controller.php?action=add-quantity" method="POST"> 
+                                                    <input type="hidden" name="productID" value="<?= $cart['productID']?>"> 
+                                                    <button type="submit" class="btn btn-outline-secondary btn-sm mx-1" style="font-size: 0.75rem; line-height: 1;"> <i class="bi bi-plus"></i>
+                                                </button> 
+                                            </form>
+                                            
+                                        </div>
+                                    </td>
+
+                                    <!-- Price -->
+                                    <td style="font-size: small;">
+                                        <span class="mx-3">
+                                            ₱<?= $CartTotal = $cart['productPrice'] * $cart['productQuantity']?>
+                                        </span>
+                                    </td>
+                                    
+                                    <!-- Delete Action -->
+                                    <td>
+                                        <form action="../controller/cart_controller.php?action=delete-item" method="POST">
+                                            <input type="hidden" name="productID" value="<?= $cart['productID']?>">
+                                            <button type="submit" class="btn btn-danger btn-sm px-3 mx-4">
+                                                <i class="bi bi-x"></i>
+                                            </button>
                                         </form>
-                                        
-                                    </div>
-                                </td>
+                                    </td>
 
-                                <!-- Price -->
-                                <td style="font-size: small;">
-                                    <span class="mx-3">
-                                        ₱<?= $CartTotal = $cart['productPrice'] * $cart['productQuantity']?>
-                                    </span>
-                                </td>
-                                
-                                <!-- Delete Action -->
-                                <td>
-                                    <form action="../controller/cart_controller.php?action=delete-item" method="POST">
-                                        <input type="hidden" name="productID" value="<?= $cart['productID']?>">
-                                        <button type="submit" class="btn btn-danger btn-sm px-3 mx-4">
-                                            <i class="bi bi-x"></i>
-                                        </button>
-                                    </form>
-                                </td>
+                                </tr>
 
-                            </tr>
-
-                            <?php endforeach;?>
+                                <?php endforeach;?>`
     
                         </tbody>
     
@@ -162,26 +178,29 @@ $CartItems = $Cart->getAllItems();
 
                 <div class="wrapper col-12 mt-3">
                         
-                    <!-- Total of Cart     -->
+                    <!-- Total of Cart-->
                     <div class="row">
                         <div class="col-12 d-flex justify-content-between align-content-center">
                             <h6 class="mx-3">Total: </h6>
                             <h6 class="mx-3">₱<?=$Cart->getCartTotal()?></h6>
                         </div>
                     </div>
-                    <!-- Total of Cart     -->
+
+                    <!-- Displays Customer Payment-->
 
                     <div class="row">
                         <div class="col-12 d-flex justify-content-between align-content-center">
                             <h6 class="mx-3">Payment: </h6>
+
                             <!-- <pre>
                                 <?php // var_dump($Cart->getPayment())?>
                             </pre>   -->
+                            
                             <h6 class="mx-3">₱<?=$Cart->getPayment()?></h6>
                         </div>
                     </div>
 
-                    <!-- Total of Cart     -->
+                    <!-- Displays Customers Change-->
                     <div class="row">
                         <div class="col-12 d-flex justify-content-between align-content-center">
                             <h6 class="mx-3">Change: </h6>
@@ -189,7 +208,7 @@ $CartItems = $Cart->getAllItems();
                         </div>
                     </div>
 
-                    <!-- Calculate Change -->
+                    <!-- Calculates Change -->
                     <div class="row">
                         <div class="col-12 d-flex justify-content-between align-items-center">
                             <form action="../controller/cart_controller.php?action=calculate-change" method="POST" class="col-12 d-flex align-items-center">
