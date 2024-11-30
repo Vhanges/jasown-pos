@@ -173,9 +173,14 @@ class Cart{
                 $stmt->execute();
             }
 
+            //Deducts the Stocks based on bought quantity 
+            foreach($items as $item){
+                $sql_command = "UPDATE products SET productStocks -= {$item['productQuantity']} WHERE productID";
+                $stmt->execute();
+            }
+
             //freeeeee
             $stmt->close();
-            $connection->close();
 
             //Clear the Cart and texts
 

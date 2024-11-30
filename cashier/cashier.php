@@ -108,7 +108,7 @@ $CartItems = $Cart->getAllItems();
                                 <?php // var_dump($CartItems); ?>
                             </pre> -->
 
-                                Display all the data in the session
+                                <!-- Display all the data in the session -->
                                 <?php foreach($CartItems as $cart): ?>
 
                                 <tr class="align-middle">
@@ -195,7 +195,7 @@ $CartItems = $Cart->getAllItems();
                             <!-- <pre>
                                 <?php // var_dump($Cart->getPayment())?>
                             </pre>   -->
-                            
+
                             <h6 class="mx-3">₱<?=$Cart->getPayment()?></h6>
                         </div>
                     </div>
