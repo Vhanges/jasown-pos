@@ -23,18 +23,24 @@ Class User{
         // fetch_assoc, isang row lang kinukuha nya 
         $user = $result->fetch_assoc();
 
+        if(!isset($user['email'])){
+            header("Location: ../index.php");
+        }
+        
         if(isset($user)){
 
-            //Evaluates if the given password is correct
-            if($password === $user['password']){
-                //Initialize Session 
-                self::setSession($user['roleDescription']);
-                //Redirect to their own page
-                self::getPage($user['roleDescription']);
-                
-            }else{
-                  header("Location: ../index.php");
-            }
+               
+            
+                    //Evaluates if the given password is correct
+                if($password === $user['password']){
+                    //Initialize Session 
+                    self::setSession($user['roleDescription']);
+                    //Redirect to their own page
+                    self::getPage($user['roleDescription']);
+                    
+                }else{
+                    header("Location: ../index.php");
+                }
 
         }
 

@@ -19,7 +19,7 @@ $userPassword = isset($_POST['user-password']) ? htmlspecialchars($_POST['user-p
 // var_dump($userPassword);
 switch(getAction('action')){
     case 'login':
-            User::login($email, $password);
+        User::login($email, $password);
         break; 
     case 'logout':
             User::logout();

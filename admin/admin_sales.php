@@ -69,6 +69,7 @@ $Sales = new Sales();
                              <th scope="col">Category</th>
                              <th scope="col">Quantity</th>
                              <th scope="col">Price</th>
+                             <th scope="col">Date</th>
                          </tr>
                      </thead>
                          <tbody>
@@ -79,6 +80,11 @@ $Sales = new Sales();
                                      <td><?= $sales["categoryName"]?></td>
                                      <td><?= $sales["quantity"]?></td>
                                      <td><?= $sales["productPrice"]?></td>
+                                     <td><?php 
+                                        $date = strtotime($sales['orderDate']);
+                                        $orderDate = date("d/m/Y", $date);
+                                        echo $orderDate;
+                                      ?></td>
                                  </tr>
                              <?php endforeach;?>
                          </tbody>

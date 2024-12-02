@@ -48,7 +48,7 @@ class Product{
         INNER JOIN
             categories
         ON
-            products.categoryID = categories.categoryID";
+            products.categoryID = categories.categoryID WHERE products.productStocks > 1";
             
         $stmt = $connection->prepare($sql_command);
         $stmt->execute();
