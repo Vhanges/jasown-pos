@@ -9,11 +9,11 @@ $productCategory = isset($_POST['productCategory']) ? htmlspecialchars($_POST['p
 $productCategoryID = isset($_POST['productCategoryID']) ? htmlspecialchars($_POST['productCategoryID']) : '';
 $productPrice = isset($_POST['productPrice']) ? htmlspecialchars($_POST['productPrice']) : '';
 $productQuantity = isset($_POST['productQuantity']) ? htmlspecialchars($_POST['productQuantity']) : '';
+$paymentMethod = isset($_POST['paymentMethod']) ? htmlspecialchars($_POST['paymentMethod']) : '';
 
 $payment = isset($_POST['payment']) ? htmlspecialchars($_POST['payment']) : '';
 
 $Cart = new Cart();
-
 
 switch(getAction('action')){
     case 'add-item':
@@ -41,8 +41,25 @@ switch(getAction('action')){
             header("Location: ../cashier/cashier.php");
         break;
     case 'process-order':
-            $Cart->setOrder();
-            header("Location: ../cashier/cashier.php");
+            $Cart->setOrder($paymentMethod);
+            if (isset(Cart::$receipt)) {
+                // Dynamically embed the receipt in the current page
+                echo Cart::$receipt; // Assuming Cart::$receipt contains the pre-generated receipt HTML
+        
+                // Add a script to handle printing
+                echo '<script>
+                    function printReceipt() {
+                        const receipt = document.getElementById("receipt");
+                        receipt.style.display = "block";
+                        window.print(); 
+                        }
+                        printReceipt(); 
+
+                        window.onafterprint = function() {
+                            window.location.href = "../cashier/cashier.php";
+                        };
+                    </script>';
+            }
         break;
     
     case 'display-items':

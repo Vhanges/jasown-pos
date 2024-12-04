@@ -3,6 +3,7 @@
 class Cart{
 
     private static $total = 0;
+    public static $receipt;
 
     public static function setCartItem($productID, $productName, $productCategory, $productCategoryID, $productQuantity, $productPrice){
         
@@ -97,6 +98,10 @@ class Cart{
         }
     }
 
+    public static function getTotal(){
+        return self::$total;
+    }
+
     public static function setPayment($payment){
         $_SESSION['payment'] = $payment;
     }
@@ -132,7 +137,7 @@ class Cart{
 
     }
 
-    public static function setOrder(){
+    public static function setOrder($paymentMethod){
 
         if(isset($_SESSION['cart'])){
 
@@ -155,7 +160,7 @@ class Cart{
             $orderID = $connection->insert_id;
 
             //insert the detailed record of the transaction
-            $sql_command = "INSERT INTO orderDetails (orderID, productID, categoryID, quantity) VALUES (?, ?, ?, ?)";
+            $sql_command = "INSERT INTO orderDetails (orderID, productID, categoryID, quantity, paymentMethod) VALUES (?, ?, ?, ?, ?)";
             $stmt = $connection->prepare($sql_command);
 
             $items = self::getAllItems();
@@ -169,7 +174,7 @@ class Cart{
                 $productQuantity = $item['productQuantity'];    
 
                 //i means int and s means string
-                $stmt->bind_param("iiii",$orderID, $productID, $productCategoryID, $productQuantity);
+                $stmt->bind_param("iiiis",$orderID, $productID, $productCategoryID, $productQuantity, $paymentMethod);
                 $stmt->execute();
             }
 
@@ -188,11 +193,56 @@ class Cart{
 
             //freeeeee
             $stmt->close();
-            
+
+
+            // Generate receipt HTML
+            $receiptHTML = '<div id="receipt" style="display: none; font-family: Arial, sans-serif; padding: 20px; border: 1px solid #ccc; width: 300px; margin: 0 auto;">';
+            $receiptHTML .= '<h1 style="text-align: center; margin: 0; font-size: 1.5em;">GCKrizBakery</h1>';
+            $receiptHTML .= '<p style="text-align: center; margin: 5px 0; font-size: 0.9em;">The Sweetest Corner in Town</p>';
+            $receiptHTML .= '<hr style="margin: 10px 0;">';
+
+            $receiptHTML .= '<p style="margin: 5px 0;"><strong>Order ID:</strong> ' . $orderID . '</p>';
+            $receiptHTML .= '<p style="margin: 5px 0;"><strong>Date:</strong> ' . date('Y-m-d') . '</p>';
+
+            $receiptHTML .= '<table style="width: 100%; border-collapse: collapse; margin-top: 10px;">';
+            $receiptHTML .= '<thead>';
+            $receiptHTML .= '<tr>';
+            $receiptHTML .= '<th style="text-align: left; border-bottom: 1px solid #ccc; padding: 5px;">Item</th>';
+            $receiptHTML .= '<th style="text-align: center; border-bottom: 1px solid #ccc; padding: 5px;">Qty</th>';
+            $receiptHTML .= '<th style="text-align: right; border-bottom: 1px solid #ccc; padding: 5px;">Price</th>';
+            $receiptHTML .= '</tr>';
+            $receiptHTML .= '</thead>';
+            $receiptHTML .= '<tbody>';
+
+            foreach ($items as $item) {
+                $itemTotal = $item['productPrice'] * $item['productQuantity'];
+                $receiptHTML .= '<tr>';
+                $receiptHTML .= '<td style="padding: 5px; font-size: 0.9em;">' . $item['productName'] . '</td>';
+                $receiptHTML .= '<td style="text-align: center; padding: 5px; font-size: 0.9em;">' . $item['productQuantity'] . '</td>';
+                $receiptHTML .= '<td style="text-align: right; padding: 5px; font-size: 0.9em;">₱' . number_format($itemTotal, 2) . '</td>';
+                $receiptHTML .= '</tr>';
+            }
+
+            $receiptHTML .= '</tbody>';
+            $receiptHTML .= '</table>';
+
+            $receiptHTML .= '<hr style="margin: 10px 0;">';
+            $receiptHTML .= '<p style="margin: 5px 0; font-size: 0.9em;"><strong>Total:</strong> ₱' . number_format($totalPayment, 2) . '</p>';
+            $receiptHTML .= '<p style="margin: 5px 0; font-size: 0.9em;"><strong>Payment Method:</strong> ' . ucfirst($paymentMethod) . '</p>';
+            $receiptHTML .= '<hr style="margin: 10px 0;">';
+
+            $receiptHTML .= '<p style="text-align: center; font-size: 0.9em;">Thank you for your purchase!</p>';
+            $receiptHTML .= '<p style="text-align: center; font-size: 0.8em; color: #555;">Visit us again soon!</p>';
+            $receiptHTML .= '</div>';
+
 
             //Clear the Cart and texts
 
             self::clearAllItems();
+
+            self::$receipt = $receiptHTML;
+
+
 
 
         }

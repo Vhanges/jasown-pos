@@ -49,7 +49,7 @@ $Products = new Product();
                          </tr>
                      </thead>
                          <tbody>
-                             <?php foreach($Products->getAll() as $product) : ?>
+                             <?php foreach($Products->getAllInventory() as $product) : ?>
                                  <tr class="align-middle">
                                      <td><?= $product["productName"]?></td>
 

@@ -32,7 +32,40 @@ class Product{
 
     }
 
-    public static function getAll(){
+    public static function getAllInventory(){
+        
+        global $connection;
+
+        $sql_command = "
+        SELECT
+            products.productID,
+            products.productName,
+            categories.categoryName,
+            products.categoryID,
+            products.productStocks, 
+            products.productPrice
+        FROM products
+        INNER JOIN
+            categories
+        ON
+            products.categoryID = categories.categoryID";
+            
+        $stmt = $connection->prepare($sql_command);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        
+        $data = $result->fetch_all(MYSQLI_ASSOC);
+
+        //free up resources
+        $result->free();
+        $stmt->close();
+        
+
+        return $data; 
+
+    }
+    public static function getAllProducts(){
         
         global $connection;
 
@@ -64,8 +97,8 @@ class Product{
 
         return $data; 
 
-
     }
+    
 
     public static function setStock($productID, $productStocks){
 

@@ -57,7 +57,7 @@ $CartItems = $Cart->getAllItems();
                             The data is fetched via the function getAll 
                             -->
 
-                            <?php foreach($Products->getAll() as $product) : ?>
+                            <?php foreach($Products->getAllProducts() as $product) : ?>
                                 <tr class="align-middle">
                                     <td><?= $product["productName"]?></td>
                                     <td><?= $product["categoryName"]?></td>
@@ -101,7 +101,7 @@ $CartItems = $Cart->getAllItems();
                 
 
                 <!-- Table Container -->
-                <div style="height: 65vh; max-height: 65vh; max-width: 50vw; overflow: auto;">
+                <div style="height: 90vh; max-height: 90vh; max-width: 50vw; overflow: auto;">
                     <table class="table table-responsive order-secondary-subtle bg-transparent">
                     
                         <tbody>
@@ -178,7 +178,7 @@ $CartItems = $Cart->getAllItems();
                 </div> 
                 
 
-                <div class="wrapper col-12 mt-3">
+                <div class="wrapper col-12 mt-4">
                         
                     <!-- Total of Cart-->
                     <div class="row">
@@ -188,22 +188,9 @@ $CartItems = $Cart->getAllItems();
                         </div>
                     </div>
 
-                    <!-- Displays Customer Payment-->
-
-                    <div class="row">
-                        <div class="col-12 d-flex justify-content-between align-content-center">
-                            <h6 class="mx-3">Payment: </h6>
-
-                            <!-- <pre>
-                                <?php // var_dump($Cart->getPayment())?>
-                            </pre>   -->
-
-                            <h6 class="mx-3">₱<?=$Cart->getPayment()?></h6>
-                        </div>
-                    </div>
-
+                    
                     <!-- Displays Customers Change-->
-                    <div class="row">
+                    <div class="row mt-2">
                         <div class="col-12 d-flex justify-content-between align-content-center">
                             <h6 class="mx-3">Change: </h6>
                             <h6 class="mx-3"><?=$Cart->getChange()?></h6>
@@ -211,7 +198,7 @@ $CartItems = $Cart->getAllItems();
                     </div>
 
                     <!-- Calculates Change -->
-                    <div class="row">
+                    <div class="row mt-2">
                         <div class="col-12 d-flex justify-content-between align-items-center">
                             <form action="../controller/cart_controller.php?action=calculate-change" method="POST" class="col-12 d-flex align-items-center">
                                 <input type="number" name="payment" class="form-control mx-2" min="1">
@@ -221,16 +208,91 @@ $CartItems = $Cart->getAllItems();
                             </form>
                         </div>
                     </div>
-
+                    
                     <!-- Process Order-->
                     <div class="row mt-2">
+                     <form action="../controller/cart_controller.php?action=process-order" method="POST" class="d-flex align-items-center">
                         <div class="col-12 d-flex justify-content-center align-content-between">
-                            <form action="../controller/cart_controller.php?action=process-order" method="POST" class="d-flex align-items-center" style="width: 100%;">
-                            <input type="hidden" class="form-control mx-2" min="1">
-                            <button type="submit" class="btn btn-success w-100">PROCESS ORDER</button>
-                            </form>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                Checkout
+                            </button>
+                            
+                            <!-- Modal -->
+                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Order Confirmation</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+
+
+                                         <!-- Total of Cart-->
+                                        <div class="row mt-2">
+                                            <div class="col-12 d-flex justify-content-between align-content-center">
+                                                <h6 class="mx-3">Total: </h6>
+                                                <h6 class="mx-3">₱<?=$Cart->getTotal()?></h6>
+                                            </div>
+                                        </div>
+
+                                        <!-- Displays Customer Payment Method-->
+
+                                        <div class="row mt-2">
+                                            <div class="col-12 d-flex justify-content-between align-content-center">
+                                                <h6 class="mx-3">Payment Method:</h6>
+                                                <div class="btn-group" role="group" aria-label="Payment Method">
+                                                    <input type="radio" class="btn-check" name="paymentMethod" id="cash" value="cash" autocomplete="off" required>
+                                                    <label class="btn btn-outline-primary" for="cash">Cash</label>
+
+                                                    <input type="radio" class="btn-check" name="paymentMethod" id="gcash" value="gcash" autocomplete="off" required>
+                                                    <label class="btn btn-outline-primary" for="gcash">Gcash</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <!-- Displays Customer Payment-->
+
+                                        <div class="row mt-2">
+                                            <div class="col-12 d-flex justify-content-between align-content-center">
+                                                <h6 class="mx-3">Payment: </h6>
+
+                                                <!-- <pre>
+                                                    <?php // var_dump($Cart->getPayment())?>
+                                                </pre>   -->
+
+                                                <h6 class="mx-3">₱<?=$Cart->getPayment()?></h6>
+                                            </div>
+                                        </div>
+
+                                        <!-- Displays Customers Change-->
+                                        <div class="row mt-2">
+                                            <div class="col-12 d-flex justify-content-between align-content-center">
+                                                <h6 class="mx-3">Change: </h6>
+                                                <h6 class="mx-3"><?=$Cart->getChange()?></h6>
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+                                    <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-success ">PROCESS ORDER</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                    </form>
+
+
+
+
                     </div>
+
 
 
 
@@ -240,5 +302,7 @@ $CartItems = $Cart->getAllItems();
 
         </div>
     </div>
+    
 </body>
+
 </html>

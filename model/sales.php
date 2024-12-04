@@ -17,9 +17,61 @@ Class Sales{
         $result->free();
         $stmt->close();
         
-        return $sales['salesToday'];
+        if(isset($sales['salesToday'])){
+            return $sales['salesToday'];
+        }else{
+            return 0;
+        }
 
     }
+
+    public static function getGcash(){
+        global $connection;
+
+        $sql_command = "SELECT SUM(totalPayment) AS gcash FROM orders INNER JOIN orderdetails on orders.orderID = orderdetails.orderID WHERE paymentMethod = 'gcash'";
+        $stmt = $connection->prepare($sql_command);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
+        $sales = $result->fetch_assoc();
+        
+        //free up resources
+        $result->free();
+        $stmt->close();
+
+        if(isset($sales['gcash'])){
+            return $sales['gcash'];
+        }else{
+            return 0;
+        }
+        
+
+    }
+    public static function getCash(){
+        global $connection;
+
+        $sql_command = "SELECT SUM(totalPayment) AS cash FROM orders INNER JOIN orderdetails on orders.orderID = orderdetails.orderID WHERE paymentMethod = 'cash'";
+        $stmt = $connection->prepare($sql_command);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
+        $sales = $result->fetch_assoc();
+        
+        //free up resources
+        $result->free();
+        $stmt->close();
+        
+        if(isset($sales['cash'])){
+            return $sales['cash'];
+        }else{
+            return 0;
+        }
+
+
+    }
+
     public static function getTotalSales(){
         global $connection;
 
@@ -35,8 +87,12 @@ Class Sales{
         //free up resources
         $result->free();
         $stmt->close();
-
-        return $data;
+        
+        if(isset($data)){
+            return $data;
+        }else{
+            return 0;
+        }
     }
     public static function getTransactionList(){
 

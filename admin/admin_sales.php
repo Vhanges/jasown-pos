@@ -31,26 +31,40 @@ $Sales = new Sales();
         </div>
         <div class="col-10 d-flex flex-column align-items-center justify-content-center">
             <!-- First Row -->
-             <div class="col-12  d-flex flex-row align-items-center justify-content-center">
-             <div class="row mb-3" style="height: 30vh; flex-direction: row;">
-                <div class="col-md-12 mb-3">
+             <div class="row col-12" style="height: 30vh; flex-direction: row;">
+                <div class="col-md-3 mb-3">
                     <div class="card text-center">
                         <div class="card-body">
-                            <h5 class="card-title">Today's Sales</h5>
-                            <p class="card-text"><?= $Sales->getSalesToday();?></p>
+                            <h6 class="card-title">Cash Payment</h6>
+                            <p class="card-text"><?= $Sales->getCash();?></p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12 mb-3">
+                <div class="col-md-3 mb-3">
                     <div class="card text-center">
                         <div class="card-body">
-                            <h5 class="card-title">Total Sales</h5>
+                            <h6 class="card-title">Gcash Payment</h6>
+                            <p class="card-text"><?= $Sales->getGcash();?></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h6 class="card-title">Total Sales</h6>
+                            <p class="card-text"><?= $Sales->getTotalSales();?></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h6 class="card-title">Total Sales</h6>
                             <p class="card-text"><?= $Sales->getTotalSales();?></p>
                         </div>
                     </div>
                 </div>
             </div>
-             </div>
         
             <!-- Second Row -->
             <div class="row" style="height: 70vh; width: 70vw; ">
@@ -69,6 +83,7 @@ $Sales = new Sales();
                              <th scope="col">Category</th>
                              <th scope="col">Quantity</th>
                              <th scope="col">Price</th>
+                             <th scope="col">Payment Method</th>
                              <th scope="col">Date</th>
                          </tr>
                      </thead>
@@ -80,6 +95,7 @@ $Sales = new Sales();
                                      <td><?= $sales["categoryName"]?></td>
                                      <td><?= $sales["quantity"]?></td>
                                      <td><?= $sales["productPrice"]?></td>
+                                     <td><?= $sales["paymentMethod"]?></td>
                                      <td><?php 
                                         $date = strtotime($sales['orderDate']);
                                         $orderDate = date("d/m/Y", $date);
